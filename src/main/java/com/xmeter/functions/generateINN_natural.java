@@ -12,7 +12,7 @@ import org.apache.jmeter.samplers.SampleResult;
 import org.apache.jmeter.samplers.Sampler;
 import org.apache.jmeter.threads.JMeterVariables;
 
-import static java.lang.Math.*;
+import static java.lang.Math.abs;
 
 public class generateINN_natural extends AbstractFunction{
     private static final List<String> desc = new LinkedList<String>();

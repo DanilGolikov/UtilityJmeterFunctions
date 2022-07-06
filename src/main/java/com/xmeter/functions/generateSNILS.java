@@ -14,12 +14,14 @@ import org.apache.jmeter.threads.JMeterVariables;
 
 import static java.lang.Math.abs;
 
-public class generateOGRN extends AbstractFunction{
+
+public class generateSNILS extends AbstractFunction{
     private static final List<String> desc = new LinkedList<String>();
     private Object[] values; // The value of the passed parameter
-    Random rd = new Random();
-    private static final String MyFunctionName = "__generateOGRN"; //function name
 
+    private static final String MyFunctionName = "__generateSNILS"; //function name
+
+    Random rd = new Random();
     public int randomFunc(int min, int max)
     {
         return rd.nextInt((max-min) + 1) + min;
@@ -35,48 +37,31 @@ public class generateOGRN extends AbstractFunction{
         return desc;
     }
 
+    public static String alignmentStr(String str, int len) {
+        String result = str;
+        while (result.length() != len) result = "0" + result;
+        return result;
+    }
+
 
     @Override
     public String execute(SampleResult arg0, Sampler arg1) throws InvalidVariableException {
 
-        int[] priznak = {0};
-        int[] godreg = {0,0};
-        int[] region = {0,0};
-        int[] num = {0,0,0,0,0,0,0};
-        int kontr;
-        int i=0;
-        int count;
-        String part;
-        String result;
+        int rnd = abs(randomFunc(0, 999999999));
+        String number = alignmentStr(""+rnd, 9);
+        String[] numMas = number.split("");
 
+        List<Integer> sumMas = new LinkedList<Integer>();
+        for (int i = 0; i < numMas.length; i++) sumMas.add(Integer.parseInt(numMas[i]) * (9 - i));
 
-        priznak[0] = abs(randomFunc(1,2));
-        if(priznak[0] == 2) priznak[0] = 5;
+        int sum = 0;
+        for (int a: sumMas) sum += a;
 
-        godreg[0] = abs(randomFunc(0,2));
-        godreg[1] = abs(randomFunc(0,9));
+        if (sum > 101) sum %= 101;
 
-        while (region[0] == 0 &&  region[1] == 0)
-        {
-            region[0] = abs(randomFunc(0,9));
-            region[1] = abs(randomFunc(0,9));
-        }
+        String checkSum = sum == 100 || sum == 101 ? "00" : alignmentStr(""+sum, 2);
 
-        for(i=0;i<7;i++)
-        {
-            num[i] = abs(randomFunc(0,9));
-        }
-
-        part = String.format("%d%d%d%d%d", priznak[0],godreg[0],godreg[1],region[0],region[1]);
-        count= Integer.parseInt(part);
-        kontr = count%11;
-        part = String.format("%d%d%d%d%d%d%d%d", kontr,num[0],num[1],num[2],num[3],num[4],num[5],num[6]);
-        count = Integer.parseInt(part);
-        kontr = (count%11)%10;
-        //if(kontr == 10) kontr=0;
-
-        result = String.format("%d%d%d%d%d%d%d%d%d%d%d%d%d", priznak[0],godreg[0],godreg[1],region[0], region[1],num[0],num[1],num[2],num[3],num[4],num[5],num[6],kontr);
-
+        String result = number+checkSum;
 
         if (values.length > 0)
         {
