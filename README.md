@@ -6,6 +6,7 @@ Ready-made functions:
  - generateINN_legal - a function that generates a valid INN for a legal entity
  - generateINN_natural - a function that generates a valid INN for a natural entity
  - generateOGRN - a function that generates a valid OGRN
+ - generateSNILS - a function that generates a valid SNILS
 
 The "Custom_functions-0.0.1-SNAPSHOT-jar-with-dependencies.jar" should be put in %jmeter%\lib\ext
 
