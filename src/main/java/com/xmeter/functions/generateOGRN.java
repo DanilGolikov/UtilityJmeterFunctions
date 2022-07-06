@@ -14,16 +14,17 @@ import org.apache.jmeter.threads.JMeterVariables;
 
 import static java.lang.Math.*;
 
-public class generateINN_legal extends AbstractFunction{
+public class generateOGRN extends AbstractFunction{
     private static final List<String> desc = new LinkedList<String>();
     private Object[] values; // The value of the passed parameter
     Random rd = new Random();
-    private static final String MyFunctionName = "__generateINN_legal"; //function name
+    private static final String MyFunctionName = "__generateOGRN"; //function name
 
     public int randomFunc(int min, int max)
     {
         return rd.nextInt((max-min) + 1) + min;
     }
+
 
     static {
         desc.add("Name of variable in which to store the result (optional)");
@@ -34,42 +35,47 @@ public class generateINN_legal extends AbstractFunction{
         return desc;
     }
 
+
     @Override
     public String execute(SampleResult arg0, Sampler arg1) throws InvalidVariableException {
 
+        int[] priznak = {0};
+        int[] godreg = {0,0};
         int[] region = {0,0};
-        int[] inspection = {0, 0};
-        int[] num = {0,0,0,0,0};
-        int[] kontr = {0};
-        int i = 0;
+        int[] num = {0,0,0,0,0,0,0};
+        int kontr;
+        int i=0;
+        int count;
+        String part;
+        String result;
 
-        while (region[0] == 0 && region[1] == 0)
+
+        priznak[0] = abs(randomFunc(1,2));
+        if(priznak[0] == 2) priznak[0] = 5;
+
+        godreg[0] = abs(randomFunc(0,2));
+        godreg[1] = abs(randomFunc(0,9));
+
+        while (region[0] == 0 &&  region[1] == 0)
         {
-            region[0] = abs(randomFunc(0, 9));
-            region[1] = abs(randomFunc(0, 9));
+            region[0] = abs(randomFunc(0,9));
+            region[1] = abs(randomFunc(0,9));
         }
 
-        while(inspection[0] == 0 &&  inspection[1] == 0)
+        for(i=0;i<7;i++)
         {
-            inspection[0] = abs(randomFunc(0, 9));
-            inspection[1] = abs(randomFunc(0, 9));
+            num[i] = abs(randomFunc(0,9));
         }
 
-        for(i=0;i<5;i++) num[i] = abs(randomFunc(0, 9));
+        part = String.format("%d%d%d%d%d", priznak[0],godreg[0],godreg[1],region[0],region[1]);
+        count= Integer.parseInt(part);
+        kontr = count%11;
+        part = String.format("%d%d%d%d%d%d%d%d", kontr,num[0],num[1],num[2],num[3],num[4],num[5],num[6]);
+        count = Integer.parseInt(part);
+        kontr = (count%11)%10;
+        //if(kontr == 10) kontr=0;
 
-        kontr[0] = ((2*region[0] +
-                4*region[1]+
-                10*inspection[0]+
-                3*inspection[1]+
-                5*num[0] +
-                9*num[1]+
-                4*num[2]+
-                6*num[3]+
-                8*num[4])%11)%10;
-
-        //if (kontr[0]==10) kontr[0]=0;
-
-        String result = String.format("%d%d%d%d%d%d%d%d%d%d", region[0], region[1],inspection[0],inspection[1],num[0],num[1],num[2],num[3],num[4],kontr[0]);
+        result = String.format("%d%d%d%d%d%d%d%d%d%d%d%d%d", priznak[0],godreg[0],godreg[1],region[0], region[1],num[0],num[1],num[2],num[3],num[4],num[5],num[6],kontr);
 
 
         if (values.length > 0)
