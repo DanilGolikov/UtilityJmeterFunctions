@@ -8,3 +8,6 @@ Ready-made functions:
  - generateOGRN - a function that generates a valid OGRN
 
 The second jar file should be put in %jmeter%\lib\ext
+
+![image](https://user-images.githubusercontent.com/80261859/177599695-e097f24d-b327-4ef6-978e-63d2bbfa06cd.png)
+
