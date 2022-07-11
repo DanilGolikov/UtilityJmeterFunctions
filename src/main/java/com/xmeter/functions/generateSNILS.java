@@ -62,11 +62,10 @@ public class generateSNILS extends AbstractFunction{
 
         String result = number+checkSum;
 
-        String inputVar = ((CompoundVariable) values[0]).execute().trim();
-        if (!inputVar.equals(""))
+        if (values.length > 0)
         {
             JMeterVariables vars = getVariables();
-            vars.put(inputVar, result);
+            vars.put(((CompoundVariable) values[0]).execute().trim(), result);
         }
         return result;
     }

@@ -40,7 +40,6 @@ public class generateINN_legal extends AbstractFunction{
         int[] inspection = {0, 0};
         int[] num = {0,0,0,0,0};
         int[] kontr = {0};
-        int i;
 
         while (region[0] == 0 && region[1] == 0)
         {
@@ -54,7 +53,7 @@ public class generateINN_legal extends AbstractFunction{
             inspection[1] = randomFunc(0, 9);
         }
 
-        for(i=0;i<5;i++) num[i] = randomFunc(0, 9);
+        for(int i=0;i<5;i++) num[i] = randomFunc(0, 9);
 
         kontr[0] = ((2*region[0] +
                 4*region[1]+
@@ -70,11 +69,11 @@ public class generateINN_legal extends AbstractFunction{
         String result = String.format("%d%d%d%d%d%d%d%d%d%d", region[0], region[1],inspection[0],inspection[1],num[0],num[1],num[2],num[3],num[4],kontr[0]);
 
 
-        String inputVar = ((CompoundVariable) values[0]).execute().trim();
-        if (!inputVar.equals(""))
+
+        if (values.length > 0)
         {
             JMeterVariables vars = getVariables();
-            vars.put(inputVar, result);
+            vars.put(((CompoundVariable) values[0]).execute().trim(), result);
         }
         return result;
     }

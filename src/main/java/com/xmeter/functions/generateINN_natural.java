@@ -87,11 +87,10 @@ public class generateINN_natural extends AbstractFunction{
         String result = String.format("%d%d%d%d%d%d%d%d%d%d%d%d", region[0], region[1],inspection[0],inspection[1],num[0],num[1],num[2],num[3],num[4],num[5],kontr[0],kontr[1]);
 
 
-        String inputVar = ((CompoundVariable) values[0]).execute().trim();
-        if (!inputVar.equals(""))
+        if (values.length > 0)
         {
             JMeterVariables vars = getVariables();
-            vars.put(inputVar, result);
+            vars.put(((CompoundVariable) values[0]).execute().trim(), result);
         }
         return result;
     }

@@ -76,11 +76,10 @@ public class generateOGRN extends AbstractFunction{
         result = String.format("%d%d%d%d%d%d%d%d%d%d%d%d%d", priznak[0],godreg[0],godreg[1],region[0], region[1],num[0],num[1],num[2],num[3],num[4],num[5],num[6],kontr);
 
 
-        String inputVar = ((CompoundVariable) values[0]).execute().trim();
-        if (!inputVar.equals(""))
+        if (values.length > 0)
         {
             JMeterVariables vars = getVariables();
-            vars.put(inputVar, result);
+            vars.put(((CompoundVariable) values[0]).execute().trim(), result);
         }
         return result;
     }
