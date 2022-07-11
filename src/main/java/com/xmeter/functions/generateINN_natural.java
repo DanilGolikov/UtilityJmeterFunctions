@@ -15,7 +15,7 @@ import org.apache.jmeter.threads.JMeterVariables;
 
 
 public class generateINN_natural extends AbstractFunction{
-    private static final List<String> desc = new LinkedList<String>();
+    private static final List<String> desc = new LinkedList<>();
     private Object[] values; // The value of the passed parameter
     Random rd = new Random();
     private static final String MyFunctionName = "__generateINN_natural"; //function name
@@ -37,13 +37,13 @@ public class generateINN_natural extends AbstractFunction{
 
 
     @Override
-    public String execute(SampleResult arg0, Sampler arg1) throws InvalidVariableException {
+    public String execute(SampleResult arg0, Sampler arg1) {
 
         int[] region = {0,0};
         int[] inspection = {0, 0};
         int[] num = {0,0,0,0,0,0};
         int[] kontr = {0,0};
-        int i = 0;
+        int i;
 
         while (region[0] == 0 && region[1] == 0)
         {
@@ -82,16 +82,16 @@ public class generateINN_natural extends AbstractFunction{
                 6*num[5]+
                 8*kontr[0])%11)%10;
 
-        //if (kontr[0]==10) kontr[0]=0;
+
 
         String result = String.format("%d%d%d%d%d%d%d%d%d%d%d%d", region[0], region[1],inspection[0],inspection[1],num[0],num[1],num[2],num[3],num[4],num[5],kontr[0],kontr[1]);
 
 
-        if (values.length > 0)
+        String inputVar = ((CompoundVariable) values[0]).execute().trim();
+        if (!inputVar.equals(""))
         {
             JMeterVariables vars = getVariables();
-            String userVariable = ((CompoundVariable) values[0]).execute().trim();
-            vars.put(userVariable, result);
+            vars.put(inputVar, result);
         }
         return result;
     }

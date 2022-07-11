@@ -17,7 +17,7 @@ import org.apache.jmeter.threads.JMeterVariables;
 
 
 public class randomStringLiteral extends AbstractFunction{
-    private static final List<String> desc = new LinkedList<String>();
+    private static final List<String> desc = new LinkedList<>();
     private Object[] values; // The value of the passed parameter
 
     private static final String MyFunctionName = "__randomStringLiteral"; //function name
@@ -55,11 +55,10 @@ public class randomStringLiteral extends AbstractFunction{
         String result = literalsInput[randomFunc(0, literalsInput.length-1)];
 
         String inputVar = ((CompoundVariable) values[2]).execute().trim();
-        if (inputVar != "")
+        if (!inputVar.equals(""))
         {
             JMeterVariables vars = getVariables();
-            String userVariable = inputVar;
-            vars.put(userVariable, result);
+            vars.put(inputVar, result);
         }
         return result;
     }

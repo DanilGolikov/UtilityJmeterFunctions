@@ -12,7 +12,7 @@ import org.apache.jmeter.threads.JMeterVariables;
 
 
 public class generateEMAIL extends AbstractFunction{
-    private static final List<String> desc = new LinkedList<String>();
+    private static final List<String> desc = new LinkedList<>();
     private Object[] values; // The value of the passed parameter
 
     private static final String MyFunctionName = "__generateEMAIL"; //function name
@@ -59,14 +59,14 @@ public class generateEMAIL extends AbstractFunction{
             throw new InputMismatchException("Impossible to generate email without a domain");
         String domainEmail = domainEmail_input[randomFunc(0, domainEmail_input.length-1)];
 
-        String nameEmail = "";
+        StringBuilder nameEmail = new StringBuilder();
 
 
         String nameEMAILsymbols = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!#$%&'*+-/=?^_`{|}~.";
 
         String useNameEmailChars_input = ((CompoundVariable) values[1]).execute().trim();
 
-        if (useNameEmailChars_input != "") {
+        if (!useNameEmailChars_input.equals("")) {
 
             int troubleChars = 0;
             for (char symbol : useNameEmailChars_input.toCharArray())
@@ -91,7 +91,7 @@ public class generateEMAIL extends AbstractFunction{
         int lenNameEmailMaximum = 64;
 
         String lenNameEmail_input = ((CompoundVariable) values[2]).execute().trim();
-        if (lenNameEmail_input != "")
+        if (!lenNameEmail_input.equals(""))
         {
             lenNameEmailMinimum = Integer.parseInt(lenNameEmail_input);
             if (lenNameEmailMinimum < 1 || lenNameEmailMinimum > 64)
@@ -99,7 +99,7 @@ public class generateEMAIL extends AbstractFunction{
         }
 
         lenNameEmail_input = ((CompoundVariable) values[3]).execute().trim();
-        if (lenNameEmail_input != "")
+        if (!lenNameEmail_input.equals(""))
         {
             lenNameEmailMaximum = Integer.parseInt(lenNameEmail_input);
             if (lenNameEmailMaximum < 1 || lenNameEmailMaximum > 64)
@@ -108,28 +108,24 @@ public class generateEMAIL extends AbstractFunction{
         int lenNameEmail = randomFunc(lenNameEmailMinimum, lenNameEmailMaximum);
 
         boolean lastDot = false;
-        nameEmail += generateChar(nameEMAILsymbols, true);
+        nameEmail.append(generateChar(nameEMAILsymbols, true));
         while (nameEmail.length() < lenNameEmail-1)
         {
             char symbol = generateChar(nameEMAILsymbols, lastDot);
-            if (symbol == '.')
-                lastDot = true;
-            else
-                lastDot = false;
-            nameEmail += symbol;
+            lastDot = symbol == '.';
+            nameEmail.append(symbol);
         }
         if (nameEmail.length() < lenNameEmail)
-            nameEmail += generateChar(nameEMAILsymbols, true);
+            nameEmail.append(generateChar(nameEMAILsymbols, true));
 
 
         String result = nameEmail + "@" + domainEmail;
 
         String inputVar = ((CompoundVariable) values[4]).execute().trim();
-        if (inputVar != "")
+        if (!inputVar.equals(""))
         {
             JMeterVariables vars = getVariables();
-            String userVariable = inputVar;
-            vars.put(userVariable, result);
+            vars.put(inputVar, result);
         }
         return result;
     }

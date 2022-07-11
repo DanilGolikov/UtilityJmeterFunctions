@@ -17,7 +17,7 @@ import org.apache.jmeter.threads.JMeterVariables;
 
 
 public class generatePIN_CODE extends AbstractFunction{
-    private static final List<String> desc = new LinkedList<String>();
+    private static final List<String> desc = new LinkedList<>();
     private Object[] values; // The value of the passed parameter
 
     private static final String MyFunctionName = "__generatePIN_CODE"; //function name
@@ -62,8 +62,8 @@ public class generatePIN_CODE extends AbstractFunction{
         //long maxPIN = Long.parseLong(new String(new char[lenPIN]).replace("\0", "9"));
         int maxPIN = Integer.parseInt(new String(new char[lenPIN]).replace("\0", "9"));
 
-        if (minPIN_check != "") minPIN = Integer.parseInt(minPIN_check);
-        if (maxPIN_check != "") maxPIN = Integer.parseInt(maxPIN_check);
+        if (!minPIN_check.equals("")) minPIN = Integer.parseInt(minPIN_check);
+        if (!maxPIN_check.equals("")) maxPIN = Integer.parseInt(maxPIN_check);
 
         if(minPIN_check.length() > lenPIN || maxPIN_check.length() > lenPIN)
         {
@@ -80,11 +80,10 @@ public class generatePIN_CODE extends AbstractFunction{
 
 
         String inputVar = ((CompoundVariable) values[3]).execute().trim();
-        if (inputVar != "")
+        if (!inputVar.equals(""))
         {
             JMeterVariables vars = getVariables();
-            String userVariable = inputVar;
-            vars.put(userVariable, result);
+            vars.put(inputVar, result);
         }
         return result;
     }

@@ -14,7 +14,7 @@ import org.apache.jmeter.threads.JMeterVariables;
 
 
 public class generateOGRN extends AbstractFunction{
-    private static final List<String> desc = new LinkedList<String>();
+    private static final List<String> desc = new LinkedList<>();
     private Object[] values; // The value of the passed parameter
     Random rd = new Random();
     private static final String MyFunctionName = "__generateOGRN"; //function name
@@ -36,14 +36,14 @@ public class generateOGRN extends AbstractFunction{
 
 
     @Override
-    public String execute(SampleResult arg0, Sampler arg1) throws InvalidVariableException {
+    public String execute(SampleResult arg0, Sampler arg1) {
 
         int[] priznak = {0};
         int[] godreg = {0,0};
         int[] region = {0,0};
         int[] num = {0,0,0,0,0,0,0};
         int kontr;
-        int i=0;
+        int i;
         int count;
         String part;
         String result;
@@ -72,16 +72,15 @@ public class generateOGRN extends AbstractFunction{
         part = String.format("%d%d%d%d%d%d%d%d", kontr,num[0],num[1],num[2],num[3],num[4],num[5],num[6]);
         count = Integer.parseInt(part);
         kontr = (count%11)%10;
-        //if(kontr == 10) kontr=0;
 
         result = String.format("%d%d%d%d%d%d%d%d%d%d%d%d%d", priznak[0],godreg[0],godreg[1],region[0], region[1],num[0],num[1],num[2],num[3],num[4],num[5],num[6],kontr);
 
 
-        if (values.length > 0)
+        String inputVar = ((CompoundVariable) values[0]).execute().trim();
+        if (!inputVar.equals(""))
         {
             JMeterVariables vars = getVariables();
-            String userVariable = ((CompoundVariable) values[0]).execute().trim();
-            vars.put(userVariable, result);
+            vars.put(inputVar, result);
         }
         return result;
     }

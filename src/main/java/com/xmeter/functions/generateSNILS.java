@@ -15,7 +15,7 @@ import org.apache.jmeter.threads.JMeterVariables;
 
 
 public class generateSNILS extends AbstractFunction{
-    private static final List<String> desc = new LinkedList<String>();
+    private static final List<String> desc = new LinkedList<>();
     private Object[] values; // The value of the passed parameter
 
     private static final String MyFunctionName = "__generateSNILS"; //function name
@@ -44,13 +44,13 @@ public class generateSNILS extends AbstractFunction{
 
 
     @Override
-    public String execute(SampleResult arg0, Sampler arg1) throws InvalidVariableException {
+    public String execute(SampleResult arg0, Sampler arg1) {
 
         int rnd = randomFunc(0, 999999999);
         String number = alignmentStr(""+rnd, 9);
         String[] numMas = number.split("");
 
-        List<Integer> sumMas = new LinkedList<Integer>();
+        List<Integer> sumMas = new LinkedList<>();
         for (int i = 0; i < numMas.length; i++) sumMas.add(Integer.parseInt(numMas[i]) * (9 - i));
 
         int sum = 0;
@@ -62,11 +62,11 @@ public class generateSNILS extends AbstractFunction{
 
         String result = number+checkSum;
 
-        if (values.length > 0)
+        String inputVar = ((CompoundVariable) values[0]).execute().trim();
+        if (!inputVar.equals(""))
         {
             JMeterVariables vars = getVariables();
-            String userVariable = ((CompoundVariable) values[0]).execute().trim();
-            vars.put(userVariable, result);
+            vars.put(inputVar, result);
         }
         return result;
     }
