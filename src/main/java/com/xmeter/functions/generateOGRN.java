@@ -12,7 +12,6 @@ import org.apache.jmeter.samplers.SampleResult;
 import org.apache.jmeter.samplers.Sampler;
 import org.apache.jmeter.threads.JMeterVariables;
 
-import static java.lang.Math.abs;
 
 public class generateOGRN extends AbstractFunction{
     private static final List<String> desc = new LinkedList<String>();
@@ -50,21 +49,21 @@ public class generateOGRN extends AbstractFunction{
         String result;
 
 
-        priznak[0] = abs(randomFunc(1,2));
+        priznak[0] = randomFunc(1,2);
         if(priznak[0] == 2) priznak[0] = 5;
 
-        godreg[0] = abs(randomFunc(0,2));
-        godreg[1] = abs(randomFunc(0,9));
+        godreg[0] = randomFunc(0,2);
+        godreg[1] = randomFunc(0,9);
 
         while (region[0] == 0 &&  region[1] == 0)
         {
-            region[0] = abs(randomFunc(0,9));
-            region[1] = abs(randomFunc(0,9));
+            region[0] = randomFunc(0,9);
+            region[1] = randomFunc(0,9);
         }
 
         for(i=0;i<7;i++)
         {
-            num[i] = abs(randomFunc(0,9));
+            num[i] = randomFunc(0,9);
         }
 
         part = String.format("%d%d%d%d%d", priznak[0],godreg[0],godreg[1],region[0],region[1]);

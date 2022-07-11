@@ -12,7 +12,7 @@ import org.apache.jmeter.samplers.SampleResult;
 import org.apache.jmeter.samplers.Sampler;
 import org.apache.jmeter.threads.JMeterVariables;
 
-import static java.lang.Math.abs;
+
 
 public class generateINN_natural extends AbstractFunction{
     private static final List<String> desc = new LinkedList<String>();
@@ -47,17 +47,17 @@ public class generateINN_natural extends AbstractFunction{
 
         while (region[0] == 0 && region[1] == 0)
         {
-            region[0] = abs(randomFunc(0, 9));
-            region[1] = abs(randomFunc(0, 9));
+            region[0] = randomFunc(0, 9);
+            region[1] = randomFunc(0, 9);
         }
 
         while(inspection[0] == 0 &&  inspection[1] == 0)
         {
-            inspection[0] = abs(randomFunc(0, 9));
-            inspection[1] = abs(randomFunc(0, 9));
+            inspection[0] = randomFunc(0, 9);
+            inspection[1] = randomFunc(0, 9);
         }
 
-        for(i=0;i<6;i++) num[i] = abs(randomFunc(0, 9));
+        for(i=0;i<6;i++) num[i] = randomFunc(0, 9);
 
         kontr[0] = ((7*region[0]+
                 2*region[1]+
