@@ -73,7 +73,7 @@ public class generateEMAIL extends AbstractFunction{
             {
                 if (!(nameEMAILsymbols.contains(Character.toString(symbol))))
                     throw new InputMismatchException("Failed to generate with such a symbol:" + symbol +
-                            "Symbols that can be used: \"a-zA-Z0-9!#$%&'*+-/=?^_`{|}~.\")");
+                            "\nSymbols that can be used: \"a-zA-Z0-9!#$%&'*+-/=?^_`{|}~.\")");
 
                 if (symbol == '.')
                     troubleChars++;
