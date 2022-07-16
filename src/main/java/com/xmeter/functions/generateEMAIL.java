@@ -138,6 +138,6 @@ public class generateEMAIL extends AbstractFunction{
     @Override
     public void setParameters(Collection<CompoundVariable> parameters) throws InvalidVariableException {
         values = parameters.toArray();
-        //test
+        
     }
 }
