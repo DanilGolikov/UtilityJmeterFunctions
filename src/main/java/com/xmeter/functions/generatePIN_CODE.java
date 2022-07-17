@@ -3,12 +3,11 @@ package com.xmeter.functions;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 import java.util.InputMismatchException;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.apache.jmeter.engine.util.CompoundVariable;
 import org.apache.jmeter.functions.AbstractFunction;
-import org.apache.jmeter.functions.InvalidVariableException;
 import org.apache.jmeter.samplers.SampleResult;
 import org.apache.jmeter.samplers.Sampler;
 import org.apache.jmeter.threads.JMeterVariables;
@@ -22,10 +21,10 @@ public class generatePIN_CODE extends AbstractFunction{
 
     private static final String MyFunctionName = "__generatePIN_CODE"; //function name
 
-    Random rd = new Random();
+
     public int randomFunc(int min, int max)
     {
-        return rd.nextInt((max-min) + 1) + min;
+        return ThreadLocalRandom.current().nextInt(min, max+1);
     }
 
 
@@ -94,7 +93,7 @@ public class generatePIN_CODE extends AbstractFunction{
     }
 
     @Override
-    public void setParameters(Collection<CompoundVariable> parameters) throws InvalidVariableException {
+    public void setParameters(Collection<CompoundVariable> parameters){
         values = parameters.toArray();
     }
 }

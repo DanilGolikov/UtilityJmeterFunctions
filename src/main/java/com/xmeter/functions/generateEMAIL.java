@@ -1,10 +1,10 @@
 package com.xmeter.functions;
 
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.apache.jmeter.engine.util.CompoundVariable;
 import org.apache.jmeter.functions.AbstractFunction;
-import org.apache.jmeter.functions.InvalidVariableException;
 import org.apache.jmeter.samplers.SampleResult;
 import org.apache.jmeter.samplers.Sampler;
 import org.apache.jmeter.threads.JMeterVariables;
@@ -17,10 +17,9 @@ public class generateEMAIL extends AbstractFunction{
 
     private static final String MyFunctionName = "__generateEMAIL"; //function name
 
-    Random rd = new Random();
     public int randomFunc(int min, int max)
     {
-        return rd.nextInt((max-min) + 1) + min;
+        return ThreadLocalRandom.current().nextInt(min, max+1);
     }
 
 
@@ -136,7 +135,7 @@ public class generateEMAIL extends AbstractFunction{
     }
 
     @Override
-    public void setParameters(Collection<CompoundVariable> parameters) throws InvalidVariableException {
+    public void setParameters(Collection<CompoundVariable> parameters){
         values = parameters.toArray();
         
     }

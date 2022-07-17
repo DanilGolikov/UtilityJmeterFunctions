@@ -3,11 +3,10 @@ package com.xmeter.functions;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.apache.jmeter.engine.util.CompoundVariable;
 import org.apache.jmeter.functions.AbstractFunction;
-import org.apache.jmeter.functions.InvalidVariableException;
 import org.apache.jmeter.samplers.SampleResult;
 import org.apache.jmeter.samplers.Sampler;
 import org.apache.jmeter.threads.JMeterVariables;
@@ -17,12 +16,12 @@ import org.apache.jmeter.threads.JMeterVariables;
 public class generateINN_natural extends AbstractFunction{
     private static final List<String> desc = new LinkedList<>();
     private Object[] values; // The value of the passed parameter
-    Random rd = new Random();
+
     private static final String MyFunctionName = "__generateINN_natural"; //function name
 
     public int randomFunc(int min, int max)
     {
-        return rd.nextInt((max-min) + 1) + min;
+        return ThreadLocalRandom.current().nextInt(min, max+1);
     }
 
 
@@ -116,7 +115,7 @@ public class generateINN_natural extends AbstractFunction{
     }
 
     @Override
-    public void setParameters(Collection<CompoundVariable> parameters) throws InvalidVariableException {
+    public void setParameters(Collection<CompoundVariable> parameters) {
         values = parameters.toArray();
     }
 }

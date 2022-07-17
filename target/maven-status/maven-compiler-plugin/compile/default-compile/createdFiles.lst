@@ -1,3 +1,4 @@
 com\xmeter\functions\generateEMAIL.class
 com\xmeter\functions\randomStringLiteral.class
+com\xmeter\functions\generatePHONE_NUMBER.class
 com\xmeter\functions\generatePIN_CODE.class
