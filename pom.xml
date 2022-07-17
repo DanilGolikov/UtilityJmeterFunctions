@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.xmeter</groupId>
     <artifactId>Custom_functions</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-RELEAS</version>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -38,7 +38,7 @@
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
                     <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                        <descriptorRef></descriptorRef>
                     </descriptorRefs>
                 </configuration>
                 <executions>
