@@ -26,6 +26,7 @@ public class generateOGRN extends AbstractFunction{
 
 
     static {
+        desc.add("Format string for INN (use 'x' for numbers) (optional)");
         desc.add("Name of variable in which to store the result (optional)");
     }
 
@@ -37,6 +38,18 @@ public class generateOGRN extends AbstractFunction{
 
     @Override
     public String execute(SampleResult arg0, Sampler arg1) {
+
+        String resultFormatString = ((CompoundVariable) values[0]).execute().trim();
+
+        if (resultFormatString.equals(""))
+            resultFormatString = "%d%d%d%d%d%d%d%d%d%d%d%d%d";
+        else
+        {
+            resultFormatString = resultFormatString.replace("%", "%%");
+            for (int i = 0; i < 13; i++)
+                resultFormatString = resultFormatString.replaceFirst("(?<!\\\\)x", "%d");
+            resultFormatString = resultFormatString.replace("\\x", "x");
+        }
 
         int[] priznak = {0};
         int[] godreg = {0,0};
@@ -73,15 +86,17 @@ public class generateOGRN extends AbstractFunction{
         count = Integer.parseInt(part);
         kontr = (count%11)%10;
 
-        result = String.format("%d%d%d%d%d%d%d%d%d%d%d%d%d", priznak[0],godreg[0],godreg[1],region[0], region[1],num[0],num[1],num[2],num[3],num[4],num[5],num[6],kontr);
+        result = String.format(resultFormatString, priznak[0],godreg[0],godreg[1],region[0], region[1],num[0],num[1],num[2],num[3],num[4],num[5],num[6],kontr);
 
 
-        if (values.length > 0)
+        String inputVar = ((CompoundVariable) values[1]).execute().trim();
+        if (!inputVar.equals(""))
         {
             JMeterVariables vars = getVariables();
-            vars.put(((CompoundVariable) values[0]).execute().trim(), result);
+            vars.put(inputVar, result);
         }
-        return result;
+
+        return  result;
     }
 
     @Override
