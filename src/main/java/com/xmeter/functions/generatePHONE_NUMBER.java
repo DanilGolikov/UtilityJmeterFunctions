@@ -30,7 +30,7 @@ public class generatePHONE_NUMBER extends AbstractFunction{
     }
 
     static {
-        desc.add("Country codes (use | as separator)");
+        desc.add("Country code(s) (use | as separator)");
         desc.add("Format string for PHONE (use 'x' for numbers) (optional)");
         desc.add("Name of variable in which to store the result (optional)");
     }
