@@ -27,6 +27,7 @@ public class generateINN_natural extends AbstractFunction{
 
 
     static {
+        desc.add("Format string for INN (use 'x' for numbers) (optional)");
         desc.add("Name of variable in which to store the result (optional)");
     }
 
@@ -38,6 +39,18 @@ public class generateINN_natural extends AbstractFunction{
 
     @Override
     public String execute(SampleResult arg0, Sampler arg1) {
+
+        String resultFormatString = ((CompoundVariable) values[0]).execute().trim();
+
+        if (resultFormatString.equals(""))
+            resultFormatString = "%d%d%d%d%d%d%d%d%d%d%d%d";
+        else
+        {
+            resultFormatString = resultFormatString.replace("%", "%%");
+            for (int i = 0; i < 12; i++)
+                resultFormatString = resultFormatString.replaceFirst("(?<!\\\\)x", "%d");
+            resultFormatString = resultFormatString.replace("\\x", "x");
+        }
 
         int[] region = {0,0};
         int[] inspection = {0, 0};
@@ -84,15 +97,17 @@ public class generateINN_natural extends AbstractFunction{
 
 
 
-        String result = String.format("%d%d%d%d%d%d%d%d%d%d%d%d", region[0], region[1],inspection[0],inspection[1],num[0],num[1],num[2],num[3],num[4],num[5],kontr[0],kontr[1]);
+        String result = String.format(resultFormatString, region[0], region[1],inspection[0],inspection[1],num[0],num[1],num[2],num[3],num[4],num[5],kontr[0],kontr[1]);
 
 
-        if (values.length > 0)
+        String inputVar = ((CompoundVariable) values[1]).execute().trim();
+        if (!inputVar.equals(""))
         {
             JMeterVariables vars = getVariables();
-            vars.put(((CompoundVariable) values[0]).execute().trim(), result);
+            vars.put(inputVar, result);
         }
-        return result;
+
+        return  result;
     }
 
     @Override
