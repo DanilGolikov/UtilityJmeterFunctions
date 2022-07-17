@@ -32,7 +32,7 @@ Ready-made functions:
      
 
 Version Jmeter: 5.4.3   
-The "Custom_functions-0.0.1-SNAPSHOT-jar-with-dependencies.jar" should be put in %jmeter%\lib\ext
+The target\Custom_functions-1.0.0.jar should be put in %jmeter%\lib\ext
 
 ![image](https://user-images.githubusercontent.com/80261859/178257439-a4f97257-3f1d-4485-837e-b1f409a9be72.png)
 
