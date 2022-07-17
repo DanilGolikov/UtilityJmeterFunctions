@@ -30,6 +30,10 @@ Ready-made functions:
      - **List string literals (use | as separator)**
      - **Use a separator (Optional)**
      
+ - `generatePHONE_NUMBER`  - a function that generates a phone number
+    - parameters:
+        - **Country code(s) (use | as separator)**
+     
 
 Version Jmeter: 5.4.3   
 The target\Custom_functions-1.0.0.jar should be put in %jmeter%\lib\ext
