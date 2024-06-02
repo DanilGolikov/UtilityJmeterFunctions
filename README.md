@@ -33,10 +33,12 @@ Ready-made functions:
  - `generatePHONE_NUMBER`  - a function that generates a phone number
     - parameters:
         - **Country code(s) (use | as separator)**
+        
+ - `samplerComment` - a function that returns a comment of the element in which it is called. Like samplerName, only samplerComment
      
 
 Version Jmeter: 5.4.3   
-The target\Custom_functions-1.0.0.jar should be put in %jmeter%\lib\ext
+The target\Custom_functions-x.x.x.jar should be put in %jmeter%\lib\ext
 
 ![image](https://user-images.githubusercontent.com/80261859/178257439-a4f97257-3f1d-4485-837e-b1f409a9be72.png)
 
