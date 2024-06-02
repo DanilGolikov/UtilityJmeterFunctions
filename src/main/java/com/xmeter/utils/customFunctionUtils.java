@@ -56,6 +56,12 @@ public class customFunctionUtils {
             case "d":
                 now = sign.equals("+") ? now.plusDays(amount) : now.minusDays(amount);
                 break;
+            case "w":
+                now = sign.equals("+") ? now.plusWeeks(amount) : now.minusWeeks(amount);
+                break;
+            case "M":
+                now = sign.equals("+") ? now.plusMonths(amount) : now.minusMonths(amount);
+                break;
             case "y":
                 now = sign.equals("+") ? now.plusYears(amount) : now.minusYears(amount);
                 break;
