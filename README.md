@@ -48,7 +48,7 @@ Ready-made functions:
      - **Target variable** - a variable to which JsonPath will be applied
      - **JsonPath expression** - JsonPath expression ._.
 
-       ![](./README_GIFs/jsonPathFromVar.gif)
+   ![](./README_GIFs/jsonPathFromVar.gif)
 ---
  - `randomStringLiteral`:
    - parameters:
