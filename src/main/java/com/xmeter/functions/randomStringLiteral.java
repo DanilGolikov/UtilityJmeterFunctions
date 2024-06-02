@@ -12,21 +12,14 @@ import org.apache.jmeter.samplers.SampleResult;
 import org.apache.jmeter.samplers.Sampler;
 import org.apache.jmeter.threads.JMeterVariables;
 
-
+import static com.xmeter.utils.customFunctionUtils.randomFunc;
 
 
 public class randomStringLiteral extends AbstractFunction{
     private static final List<String> desc = new LinkedList<>();
     private Object[] values; // The value of the passed parameter
 
-    private static final String MyFunctionName = "__randomStringLiteral"; //function name
-
-    public int randomFunc(int min, int max)
-    {
-        return ThreadLocalRandom.current().nextInt(min, max+1);
-    }
-
-
+    private static final String MyFunctionName = "__c_randomStringLiteral"; //function name
     static {
 
         desc.add("List string literals (use | as separator)");
@@ -45,7 +38,7 @@ public class randomStringLiteral extends AbstractFunction{
         String separatorLiterals = "|";
 
         String separatorLiterals_input = ((CompoundVariable) values[1]).execute().trim();
-        if (!separatorLiterals_input.equals(""))
+        if (!separatorLiterals_input.isEmpty())
             separatorLiterals = separatorLiterals_input;
 
         String[] literalsInput = (((CompoundVariable) values[0]).execute().trim()).split(Pattern.quote(separatorLiterals));
@@ -53,7 +46,7 @@ public class randomStringLiteral extends AbstractFunction{
         String result = literalsInput[randomFunc(0, literalsInput.length-1)];
 
         String inputVar = ((CompoundVariable) values[2]).execute().trim();
-        if (!inputVar.equals(""))
+        if (!inputVar.isEmpty())
         {
             JMeterVariables vars = getVariables();
             vars.put(inputVar, result);

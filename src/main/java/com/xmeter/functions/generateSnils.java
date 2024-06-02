@@ -11,21 +11,15 @@ import org.apache.jmeter.samplers.SampleResult;
 import org.apache.jmeter.samplers.Sampler;
 import org.apache.jmeter.threads.JMeterVariables;
 
+import static com.xmeter.utils.customFunctionUtils.alignmentStr;
+import static com.xmeter.utils.customFunctionUtils.randomFunc;
 
 
-public class generateSNILS extends AbstractFunction{
+public class generateSnils extends AbstractFunction{
     private static final List<String> desc = new LinkedList<>();
     private Object[] values; // The value of the passed parameter
 
-    private static final String MyFunctionName = "__generateSNILS"; //function name
-
-
-    public int randomFunc(int min, int max)
-    {
-        return ThreadLocalRandom.current().nextInt(min, max+1);
-    }
-
-
+    private static final String MyFunctionName = "__c_generateSnils"; //function name
     static {
         desc.add("Format string for SNILS (use 'x' for numbers) (optional)");
         desc.add("Name of variable in which to store the result (optional)");
@@ -35,13 +29,6 @@ public class generateSNILS extends AbstractFunction{
     public List<String> getArgumentDesc() {
         return desc;
     }
-
-    public static String alignmentStr(String str, int len) {
-        String result = str;
-        while (result.length() != len) result = "0" + result;
-        return result;
-    }
-
 
     @Override
     public String execute(SampleResult arg0, Sampler arg1) {
@@ -71,7 +58,7 @@ public class generateSNILS extends AbstractFunction{
 
         String result = number+checkSum;
 
-        if (!resultFormatString.equals(""))
+        if (!resultFormatString.isEmpty())
             result = String.format(resultFormatString, result.charAt(0),
                                                         result.charAt(1),
                                                         result.charAt(2),
@@ -90,7 +77,7 @@ public class generateSNILS extends AbstractFunction{
 
 
         String inputVar = ((CompoundVariable) values[1]).execute().trim();
-        if (!inputVar.equals(""))
+        if (!inputVar.isEmpty())
         {
             JMeterVariables vars = getVariables();
             vars.put(inputVar, result);

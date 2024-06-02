@@ -11,18 +11,14 @@ import org.apache.jmeter.samplers.SampleResult;
 import org.apache.jmeter.samplers.Sampler;
 import org.apache.jmeter.threads.JMeterVariables;
 
+import static com.xmeter.utils.customFunctionUtils.randomFunc;
 
-public class generateINN_legal extends AbstractFunction{
+
+public class generateInnLegal extends AbstractFunction{
     private static final List<String> desc = new LinkedList<>();
     private Object[] values; // The value of the passed parameter
 
-    private static final String MyFunctionName = "__generateINN_legal"; //function name
-
-    public int randomFunc(int min, int max)
-    {
-        return ThreadLocalRandom.current().nextInt(min, max+1);
-    }
-
+    private static final String MyFunctionName = "__c_generateInnLegal"; //function name
     static {
         desc.add("Format string for INN (use 'x' for numbers) (optional)");
         desc.add("Name of variable in which to store the result (optional)");
@@ -38,7 +34,7 @@ public class generateINN_legal extends AbstractFunction{
 
         String resultFormatString = ((CompoundVariable) values[0]).execute().trim();
 
-        if (resultFormatString.equals(""))
+        if (resultFormatString.isEmpty())
             resultFormatString = "%d%d%d%d%d%d%d%d%d%d";
         else
         {
@@ -86,7 +82,7 @@ public class generateINN_legal extends AbstractFunction{
 
 
         String inputVar = ((CompoundVariable) values[1]).execute().trim();
-        if (!inputVar.equals(""))
+        if (!inputVar.isEmpty())
         {
             JMeterVariables vars = getVariables();
             vars.put(inputVar, result);

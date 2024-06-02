@@ -9,26 +9,14 @@ import org.apache.jmeter.samplers.SampleResult;
 import org.apache.jmeter.samplers.Sampler;
 import org.apache.jmeter.threads.JMeterVariables;
 
+import static com.xmeter.utils.customFunctionUtils.alignmentStr;
+import static com.xmeter.utils.customFunctionUtils.randomFunc;
 
-public class generatePHONE_NUMBER extends AbstractFunction{
+
+public class generatePhoneNumber extends AbstractFunction{
     private static final List<String> desc = new LinkedList<>();
     private Object[] values; // The value of the passed parameter
-    private static final String MyFunctionName = "__generatePHONE_NUMBER"; //function name
-
-    public int randomFunc(int min, int max)
-    {
-        return ThreadLocalRandom.current().nextInt(min, max+1);
-    }
-    public long randomFunc(long min, long max)
-    {
-        return ThreadLocalRandom.current().nextLong(min, max+1);
-    }
-    public static String alignmentStr(String str, int len) {
-        String result = str;
-        while (result.length() != len) result = "0" + result;
-        return result;
-    }
-
+    private static final String MyFunctionName = "__c_generatePhoneNumber"; //function name
     static {
         desc.add("Country code(s) (use | as separator)");
         desc.add("Format string for PHONE (use 'x' for numbers) (optional)");
@@ -51,7 +39,7 @@ public class generatePHONE_NUMBER extends AbstractFunction{
             throw new InputMismatchException("Impossible to generate phone number without a country code");
 
         String resultFormatString = ((CompoundVariable) values[1]).execute();
-        if (!resultFormatString.equals("")) {
+        if (!resultFormatString.isEmpty()) {
             resultFormatString = resultFormatString.replace("%", "%%");
             for (int i = 0; i < 10; i++)
                 resultFormatString = resultFormatString.replaceFirst("(?<!\\\\)x", "%s");
@@ -64,7 +52,7 @@ public class generatePHONE_NUMBER extends AbstractFunction{
 
         String result = countryCodeStr + otherNumbers;
 
-        if (!resultFormatString.equals(""))
+        if (!resultFormatString.isEmpty())
             result = countryCodeStr +
                     String.format(resultFormatString, otherNumbers.charAt(0),
                                                         otherNumbers.charAt(1),
@@ -80,7 +68,7 @@ public class generatePHONE_NUMBER extends AbstractFunction{
 
 
         String inputVar = ((CompoundVariable) values[2]).execute().trim();
-        if (!inputVar.equals(""))
+        if (!inputVar.isEmpty())
         {
             JMeterVariables vars = getVariables();
             vars.put(inputVar, result);

@@ -11,20 +11,14 @@ import org.apache.jmeter.samplers.SampleResult;
 import org.apache.jmeter.samplers.Sampler;
 import org.apache.jmeter.threads.JMeterVariables;
 
+import static com.xmeter.utils.customFunctionUtils.randomFunc;
 
 
-public class generateINN_natural extends AbstractFunction{
+public class generateOgrn extends AbstractFunction{
     private static final List<String> desc = new LinkedList<>();
     private Object[] values; // The value of the passed parameter
 
-    private static final String MyFunctionName = "__generateINN_natural"; //function name
-
-    public int randomFunc(int min, int max)
-    {
-        return ThreadLocalRandom.current().nextInt(min, max+1);
-    }
-
-
+    private static final String MyFunctionName = "__c_generateOgrn"; //function name
     static {
         desc.add("Format string for INN (use 'x' for numbers) (optional)");
         desc.add("Name of variable in which to store the result (optional)");
@@ -41,66 +35,56 @@ public class generateINN_natural extends AbstractFunction{
 
         String resultFormatString = ((CompoundVariable) values[0]).execute().trim();
 
-        if (resultFormatString.equals(""))
-            resultFormatString = "%d%d%d%d%d%d%d%d%d%d%d%d";
+        if (resultFormatString.isEmpty())
+            resultFormatString = "%d%d%d%d%d%d%d%d%d%d%d%d%d";
         else
         {
             resultFormatString = resultFormatString.replace("%", "%%");
-            for (int i = 0; i < 12; i++)
+            for (int i = 0; i < 13; i++)
                 resultFormatString = resultFormatString.replaceFirst("(?<!\\\\)x", "%d");
             resultFormatString = resultFormatString.replace("\\x", "x");
         }
 
+        int[] priznak = {0};
+        int[] godreg = {0,0};
         int[] region = {0,0};
-        int[] inspection = {0, 0};
-        int[] num = {0,0,0,0,0,0};
-        int[] kontr = {0,0};
+        int[] num = {0,0,0,0,0,0,0};
+        int kontr;
         int i;
+        int count;
+        String part;
+        String result;
 
-        while (region[0] == 0 && region[1] == 0)
+
+        priznak[0] = randomFunc(1,2);
+        if(priznak[0] == 2) priznak[0] = 5;
+
+        godreg[0] = randomFunc(0,2);
+        godreg[1] = randomFunc(0,9);
+
+        while (region[0] == 0 &&  region[1] == 0)
         {
-            region[0] = randomFunc(0, 9);
-            region[1] = randomFunc(0, 9);
+            region[0] = randomFunc(0,9);
+            region[1] = randomFunc(0,9);
         }
 
-        while(inspection[0] == 0 &&  inspection[1] == 0)
+        for(i=0;i<7;i++)
         {
-            inspection[0] = randomFunc(0, 9);
-            inspection[1] = randomFunc(0, 9);
+            num[i] = randomFunc(0,9);
         }
 
-        for(i=0;i<6;i++) num[i] = randomFunc(0, 9);
+        part = String.format("%d%d%d%d%d", priznak[0],godreg[0],godreg[1],region[0],region[1]);
+        count= Integer.parseInt(part);
+        kontr = count%11;
+        part = String.format("%d%d%d%d%d%d%d%d", kontr,num[0],num[1],num[2],num[3],num[4],num[5],num[6]);
+        count = Integer.parseInt(part);
+        kontr = (count%11)%10;
 
-        kontr[0] = ((7*region[0]+
-                2*region[1]+
-                4*inspection[0]+
-                10*inspection[1]+
-                3*num[0]+
-                5*num[1]+
-                9*num[2]+
-                4*num[3]+
-                6*num[4]+
-                8*num[5])%11)%10;
-
-        kontr[1] = ((3*region[0]+
-                7*region[1]+
-                2*inspection[0]+
-                4*inspection[1]+
-                10*num[0]+
-                3*num[1]+
-                5*num[2]+
-                9*num[3]+
-                4*num[4]+
-                6*num[5]+
-                8*kontr[0])%11)%10;
-
-
-
-        String result = String.format(resultFormatString, region[0], region[1],inspection[0],inspection[1],num[0],num[1],num[2],num[3],num[4],num[5],kontr[0],kontr[1]);
+        result = String.format(resultFormatString, priznak[0],godreg[0],godreg[1],region[0], region[1],num[0],num[1],num[2],num[3],num[4],num[5],num[6],kontr);
 
 
         String inputVar = ((CompoundVariable) values[1]).execute().trim();
-        if (!inputVar.equals(""))
+        if (!inputVar.isEmpty())
         {
             JMeterVariables vars = getVariables();
             vars.put(inputVar, result);
