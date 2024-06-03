@@ -32,32 +32,24 @@ public class generateSnils extends AbstractFunction{
 
     @Override
     public String execute(SampleResult arg0, Sampler arg1) {
-
         String resultFormatString = ((CompoundVariable) values[0]).execute().trim();
         resultFormatString = resultFormatString.replace("%", "%%");
         for (int i = 0; i < 11; i++)
             resultFormatString = resultFormatString.replaceFirst("(?<!\\\\)x", "%s");
         resultFormatString = resultFormatString.replace("\\x", "x");
 
-
-
-
-        int rnd = randomFunc(0, 999999999);
-        String number = alignmentStr(""+rnd, 9);
+        String number = alignmentStr(randomFunc(0, 999999999), 9);
         String[] numMas = number.split("");
 
         List<Integer> sumMas = new LinkedList<>();
-        for (int i = 0; i < numMas.length; i++) sumMas.add(Integer.parseInt(numMas[i]) * (9 - i));
+        for (int i = 0; i < numMas.length; i++)
+            sumMas.add(Integer.parseInt(numMas[i]) * (9 - i));
 
         int sum = 0;
         for (int a: sumMas) sum += a;
-
         if (sum > 101) sum %= 101;
-
-        String checkSum = sum == 100 || sum == 101 ? "00" : alignmentStr(""+sum, 2);
-
+        String checkSum = sum == 100 || sum == 101 ? "00" : alignmentStr(sum, 2);
         String result = number+checkSum;
-
         if (!resultFormatString.isEmpty())
             result = String.format(resultFormatString, result.charAt(0),
                                                         result.charAt(1),
@@ -71,18 +63,9 @@ public class generateSnils extends AbstractFunction{
                                                         result.charAt(9),
                                                         result.charAt(10));
 
-
-
-
-
-
         String inputVar = ((CompoundVariable) values[1]).execute().trim();
         if (!inputVar.isEmpty())
-        {
-            JMeterVariables vars = getVariables();
-            vars.put(inputVar, result);
-        }
-
+            getVariables().put(inputVar, result);
         return  result;
 
     }

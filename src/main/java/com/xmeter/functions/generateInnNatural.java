@@ -32,9 +32,7 @@ public class generateInnNatural extends AbstractFunction{
 
     @Override
     public String execute(SampleResult arg0, Sampler arg1) {
-
         String resultFormatString = ((CompoundVariable) values[0]).execute().trim();
-
         if (resultFormatString.isEmpty())
             resultFormatString = "%d%d%d%d%d%d%d%d%d%d%d%d";
         else
@@ -88,18 +86,11 @@ public class generateInnNatural extends AbstractFunction{
                 6*num[5]+
                 8*kontr[0])%11)%10;
 
-
-
         String result = String.format(resultFormatString, region[0], region[1],inspection[0],inspection[1],num[0],num[1],num[2],num[3],num[4],num[5],kontr[0],kontr[1]);
-
 
         String inputVar = ((CompoundVariable) values[1]).execute().trim();
         if (!inputVar.isEmpty())
-        {
-            JMeterVariables vars = getVariables();
-            vars.put(inputVar, result);
-        }
-
+            getVariables().put(inputVar, result);
         return  result;
     }
 

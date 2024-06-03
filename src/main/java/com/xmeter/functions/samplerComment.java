@@ -28,19 +28,10 @@ public class samplerComment extends AbstractFunction{
 
     @Override
     public String execute(SampleResult arg0, Sampler currentSampler) {
-        String result = "";
-        if (currentSampler != null) { // will be null if function is used on TestPlan
-            result = currentSampler.getComment();
-        }
-        if (values.length > 0){
-            JMeterVariables vars = getVariables();
-            if (vars != null) {// May be null if function is used on TestPlan
-                String varName = ((CompoundVariable) values[0]).execute().trim();
-                if (!varName.isEmpty()) {
-                    vars.put(varName, result);
-                }
-            }
-        }
+        String result = currentSampler.getComment();
+        String inputVar = ((CompoundVariable) values[0]).execute().trim();
+        if (!inputVar.isEmpty())
+            getVariables().put(inputVar, result);
         return  result;
     }
 

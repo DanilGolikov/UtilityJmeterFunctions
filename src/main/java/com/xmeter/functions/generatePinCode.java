@@ -51,25 +51,15 @@ public class generatePinCode extends AbstractFunction{
         if (!maxPIN_check.isEmpty()) maxPIN = Integer.parseInt(maxPIN_check);
 
         if(minPIN_check.length() > lenPIN || maxPIN_check.length() > lenPIN)
-        {
             throw new InputMismatchException("The length of the PIN code cannot be less than the length of the maximum or minimum number");
-
-        }
         if (minPIN < 0 || maxPIN < 0)
-        {
             throw new InputMismatchException("Numbers cannot be less than 0");
-        }
 
-        String numberPIN = Integer.toString(randomFunc(minPIN, maxPIN));
-        String result = alignmentStr(numberPIN, lenPIN);
-
+        String result = alignmentStr(randomFunc(minPIN, maxPIN), lenPIN);
 
         String inputVar = ((CompoundVariable) values[3]).execute().trim();
         if (!inputVar.isEmpty())
-        {
-            JMeterVariables vars = getVariables();
-            vars.put(inputVar, result);
-        }
+            getVariables().put(inputVar, result);
         return result;
     }
 

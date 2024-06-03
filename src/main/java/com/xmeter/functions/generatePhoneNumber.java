@@ -32,9 +32,7 @@ public class generatePhoneNumber extends AbstractFunction{
 
     @Override
     public String execute(SampleResult arg0, Sampler arg1) {
-
         String[] countryCode = ((CompoundVariable) values[0]).execute().trim().split("\\|");
-        for (String var : countryCode) Integer.parseInt(var);
         if (Objects.equals(countryCode[0], ""))
             throw new InputMismatchException("Impossible to generate phone number without a country code");
 
@@ -47,9 +45,7 @@ public class generatePhoneNumber extends AbstractFunction{
         }
 
         String countryCodeStr = countryCode[randomFunc(0, countryCode.length-1)];
-
-        String otherNumbers = alignmentStr(Long.toString(randomFunc(0, Long.parseLong("9999999999")+1)), 10);
-
+        String otherNumbers = alignmentStr(randomFunc(0, Long.parseLong("9999999999")+1), 10);
         String result = countryCodeStr + otherNumbers;
 
         if (!resultFormatString.isEmpty())
@@ -69,11 +65,7 @@ public class generatePhoneNumber extends AbstractFunction{
 
         String inputVar = ((CompoundVariable) values[2]).execute().trim();
         if (!inputVar.isEmpty())
-        {
-            JMeterVariables vars = getVariables();
-            vars.put(inputVar, result);
-        }
-
+            getVariables().put(inputVar, result);
         return  result;
     }
 

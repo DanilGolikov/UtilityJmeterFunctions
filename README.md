@@ -50,6 +50,29 @@ Ready-made functions:
 
    ![](./README_GIFs/jsonPathFromVar.gif)
 ---
+ - `globalCounter` - Counter that is accessible anywhere in the TestPlan. It is possible to create multiple counters by assigning them names. The counter uses the synchronized modifier in its methods, which means that each time it is accessed, the retrieved value will be unique (for example, if 100 threads simultaneously access the counter, each will receive a unique value within the range). However, this also means potential slowdowns with a large number of threads (although this has not been tested yet)
+   - parameters:
+     - **Counter name** - unique name for the counter instance
+     - **Command type** - command that defines the behavior of the counter when invoked
+       - _addAndGet_
+       - _getAndAdd_
+       - _set_
+       - _get_
+       - _delete_
+     - **Start value** -  initial value of the counter. It is set only when the counter is created and with the **set** command (can be negative)
+     - **End value** - final value of the counter. When this value is reached (or exceeded), the counter will reset to the **Start value** (can be negative)
+     - **Implement value** - value that will be added (can be negative)
+     - **Number length** - format length of the counter
+
+   **Load**
+   ![](./README_GIFs/globalCounter_load.gif)
+    **Add**
+   ![](./README_GIFs/globalCounter_add.gif)
+    **Start value & End value**
+   ![](./README_GIFs/globalCounter_start_end.gif)
+   **Errors**
+   ![](./README_GIFs/globalCounter_errors.gif)
+---
  - `randomStringLiteral`:
    - parameters:
      - **List string literals (use | as separator)**
@@ -76,8 +99,10 @@ Ready-made functions:
        - **M** - month
        - **y** - years
      - **Time format (default timestamp)** - the format in which the random date will be returned
-
+    
+   **Relative time**
    ![](./README_GIFs/timeRandom_relative.gif)
+   **Absolute time**
    ![](./README_GIFs/timeRandom_absolute.gif)
 ---
 Version Jmeter: 5.4.3   

@@ -51,9 +51,7 @@ public class generateEmail extends AbstractFunction{
         if (Objects.equals(domainEmail_input[0], ""))
             throw new InputMismatchException("Impossible to generate email without a domain");
         String domainEmail = domainEmail_input[randomFunc(0, domainEmail_input.length-1)];
-
         StringBuilder nameEmail = new StringBuilder();
-
 
         String nameEMAILsymbols = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!#$%&'*+-/=?^_`{|}~.";
 
@@ -77,14 +75,11 @@ public class generateEmail extends AbstractFunction{
 
             nameEMAILsymbols = useNameEmailChars_input;
         }
-
-
-
         int lenNameEmailMinimum = 1;
         int lenNameEmailMaximum = 64;
 
         String lenNameEmail_input = ((CompoundVariable) values[2]).execute().trim();
-        if (!lenNameEmail_input.equals(""))
+        if (!lenNameEmail_input.isEmpty())
         {
             lenNameEmailMinimum = Integer.parseInt(lenNameEmail_input);
             if (lenNameEmailMinimum < 1 || lenNameEmailMinimum > 64)
@@ -92,7 +87,7 @@ public class generateEmail extends AbstractFunction{
         }
 
         lenNameEmail_input = ((CompoundVariable) values[3]).execute().trim();
-        if (!lenNameEmail_input.equals(""))
+        if (!lenNameEmail_input.isEmpty())
         {
             lenNameEmailMaximum = Integer.parseInt(lenNameEmail_input);
             if (lenNameEmailMaximum < 1 || lenNameEmailMaximum > 64)
@@ -111,15 +106,11 @@ public class generateEmail extends AbstractFunction{
         if (nameEmail.length() < lenNameEmail)
             nameEmail.append(generateChar(nameEMAILsymbols, true));
 
-
         String result = nameEmail + "@" + domainEmail;
 
         String inputVar = ((CompoundVariable) values[4]).execute().trim();
-        if (!inputVar.equals(""))
-        {
-            JMeterVariables vars = getVariables();
-            vars.put(inputVar, result);
-        }
+        if (!inputVar.isEmpty())
+            getVariables().put(inputVar, result);
         return result;
     }
 

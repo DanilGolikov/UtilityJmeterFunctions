@@ -47,10 +47,7 @@ public class randomStringLiteral extends AbstractFunction{
 
         String inputVar = ((CompoundVariable) values[2]).execute().trim();
         if (!inputVar.isEmpty())
-        {
-            JMeterVariables vars = getVariables();
-            vars.put(inputVar, result);
-        }
+            getVariables().put(inputVar, result);
         return result;
     }
 

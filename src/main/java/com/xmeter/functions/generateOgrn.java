@@ -32,7 +32,6 @@ public class generateOgrn extends AbstractFunction{
 
     @Override
     public String execute(SampleResult arg0, Sampler arg1) {
-
         String resultFormatString = ((CompoundVariable) values[0]).execute().trim();
 
         if (resultFormatString.isEmpty())
@@ -85,11 +84,7 @@ public class generateOgrn extends AbstractFunction{
 
         String inputVar = ((CompoundVariable) values[1]).execute().trim();
         if (!inputVar.isEmpty())
-        {
-            JMeterVariables vars = getVariables();
-            vars.put(inputVar, result);
-        }
-
+            getVariables().put(inputVar, result);
         return  result;
     }
 

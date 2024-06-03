@@ -11,10 +11,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class customFunctionUtils {
-    public static String alignmentStr(String str, int len) {
-        StringBuilder result = new StringBuilder(str);
-        while (result.length() != len) result.insert(0, "0");
-        return result.toString();
+    public static String alignmentStr(int str, int len) {
+        return String.format("%0" + len + "d", str);
+    }
+
+    public static String alignmentStr(long str, int len) {
+        return String.format("%0" + len + "d", str);
     }
 
     public static Long convertToTimestamp(String dateTimeString) {

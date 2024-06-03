@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.xmeter</groupId>
     <artifactId>Custom_functions</artifactId>
-    <version>1.1.1</version>
+    <version>1.1.2</version>
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
