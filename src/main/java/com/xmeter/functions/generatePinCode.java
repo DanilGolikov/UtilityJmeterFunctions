@@ -40,9 +40,6 @@ public class generatePinCode extends AbstractFunction{
         String minPIN_check = ((CompoundVariable) values[1]).execute().trim();
         String maxPIN_check = ((CompoundVariable) values[2]).execute().trim();
 
-
-
-
         int minPIN = 0;
         //long maxPIN = Long.parseLong(new String(new char[lenPIN]).replace("\0", "9"));
         int maxPIN = Integer.parseInt(new String(new char[lenPIN]).replace("\0", "9"));

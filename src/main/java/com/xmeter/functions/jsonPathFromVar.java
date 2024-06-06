@@ -36,9 +36,8 @@ public class jsonPathFromVar extends AbstractFunction{
             result = JsonPath.parse(targetVar).read(jsonPathExpression).toString();
         }
         String inputVar = ((CompoundVariable) values[2]).execute().trim();
-        if (!inputVar.isEmpty()) {
+        if (!inputVar.isEmpty())
             getVariables().put(inputVar, result);
-        }
         return  result;
     }
 

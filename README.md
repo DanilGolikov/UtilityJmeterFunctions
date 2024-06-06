@@ -3,8 +3,22 @@
 Custom functions for jmeter
 
 Ready-made functions:
-- `generateEmail` - a function that generates a email
-    - parametrs:
+- `forEachArray` - is a function for iterating over an array by calling a function. Each call to this function increments the index
+  - parameters:
+    - **Array or variable** - specifies an array or variable. If the variable is not found, it is converted into an array
+    - **End value (default null) (optional)** - the value that will be returned when all elements have been processed
+    - **For all threads (default false) (optional)** - a flag determining the array's scope
+      - _true_: each thread can access the same array (synchronized is used)
+      - _false_: a separate array is declared for each thread
+    - **Command (clear, delete) (optional)** - special commands for interacting with the array storage
+      - _clear_: remove all saved arrays
+      - _delete_: remove only the specified array
+
+    ![](./README_GIFs/forEachArray_start.gif)
+    ![](./README_GIFs/forEachArray_load.gif)
+---
+- `generateEmail` - a function that generates an email
+    - parameters:
         - **List domain(s) (use | as separator)**: a list of domains that will be randomly inserted at the end of the email
         - **Use chars in name email (Optional)**: list of characters to be used in generating the email name
         - **Minimum length of the email name (min 1) (Optional)**
