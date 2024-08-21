@@ -3,7 +3,8 @@
 Custom functions for jmeter
 
 Ready-made functions:
-- `forEachArray` - is a function for iterating over an array by calling a function. Each call to this function increments the index
+## forEachArray 
+Is a function for iterating over an array by calling a function. Each call to this function increments the index
   - parameters:
     - **Array or variable** - specifies an array or variable. If the variable is not found, it is converted into an array
     - **End value (default null) (optional)** - the value that will be returned when all elements have been processed
@@ -14,37 +15,43 @@ Ready-made functions:
       - _clear_: remove all saved arrays
       - _delete_: remove only the specified array
 
-    ![](./README_GIFs/forEachArray_start.gif)
-    ![](./README_GIFs/forEachArray_load.gif)
+  ![](./README_GIFs/forEachArray_start.gif)
+  ![](./README_GIFs/forEachArray_load.gif)
 ---
-- `generateEmail` - a function that generates an email
+## generateEmail
+A function that generates an email
     - parameters:
         - **List domain(s) (use | as separator)**: a list of domains that will be randomly inserted at the end of the email
         - **Use chars in name email (Optional)**: list of characters to be used in generating the email name
         - **Minimum length of the email name (min 1) (Optional)**
         - **Maximum length of the email name (max 64) (Optional)**
-
-    ![](./README_GIFs/generateEmail.gif)
+        
+  ![](./README_GIFs/generateEmail.gif)
 --- 
- - `generateInnLegal` - a function that generates a valid INN for a legal entity
+## generateInnLegal
+A function that generates a valid INN for a legal entity
 
-    ![](./README_GIFs/generateInnLegal.gif)
+  ![](./README_GIFs/generateInnLegal.gif)
  ---
- - `generateInnNatural` - a function that generates a valid INN for a natural entity
+## generateInnNatural
+A function that generates a valid INN for a natural entity
 
-    ![](./README_GIFs/generateInnNatural.gif)
+  ![](./README_GIFs/generateInnNatural.gif)
  ---
- - `generateOgrn` - a function that generates a valid OGRN
+## generateOgrn
+A function that generates a valid OGRN
 
    ![](./README_GIFs/generateOgrn.gif)
  ---
-- `generatePhoneNumber` - a function that generates a phone number
+## generatePhoneNumber
+A function that generates a phone number
     - parameters:
         - **Country code(s) (use | as separator)**
 
   ![](./README_GIFs/generatePhoneNumber.gif)
 ---
-- `generatePinCode` - a function that generates a PIN_CODE
+## generatePinCode
+A function that generates a PIN_CODE
     - parameters:
         - **PIN-code length**: specifies the length of the PIN code. If the length of the generated number   
           is less than the entered one, then the number will align to the entered length
@@ -53,18 +60,21 @@ Ready-made functions:
 
   ![](./README_GIFs/generatePinCode.gif)
 ---
- - `generateSnils` - a function that generates a valid SNILS
+ ## generateSnils
+ A function that generates a valid SNILS
 
    ![](./README_GIFs/generateSnils.gif)
 ---
- - `jsonPathFromVar` - allows extracting values from a variable that stores JSON using JsonPath
+ ## jsonPathFromVar
+ Allows extracting values from a variable that stores JSON using JsonPath
    - parameters:
      - **Target variable** - a variable to which JsonPath will be applied
      - **JsonPath expression** - JsonPath expression ._.
 
    ![](./README_GIFs/jsonPathFromVar.gif)
 ---
- - `globalCounter` - Counter that is accessible anywhere in the TestPlan. It is possible to create multiple counters by assigning them names. The counter uses the synchronized modifier in its methods, which means that each time it is accessed, the retrieved value will be unique (for example, if 100 threads simultaneously access the counter, each will receive a unique value within the range). However, this also means potential slowdowns with a large number of threads (although this has not been tested yet)
+ ## globalCounter
+ Counter that is accessible anywhere in the TestPlan. It is possible to create multiple counters by assigning them names. The counter uses the synchronized modifier in its methods, which means that each time it is accessed, the retrieved value will be unique (for example, if 100 threads simultaneously access the counter, each will receive a unique value within the range). However, this also means potential slowdowns with a large number of threads (although this has not been tested yet)
    - parameters:
      - **Counter name** - unique name for the counter instance
      - **Command type** - command that defines the behavior of the counter when invoked
@@ -78,27 +88,29 @@ Ready-made functions:
      - **Implement value** - value that will be added (can be negative)
      - **Number length** - format length of the counter
 
-   **Load**
-   ![](./README_GIFs/globalCounter_load.gif)
-    **Add**
-   ![](./README_GIFs/globalCounter_add.gif)
-    **Start value & End value**
-   ![](./README_GIFs/globalCounter_start_end.gif)
-   **Errors**
-   ![](./README_GIFs/globalCounter_errors.gif)
+   **Load**</br>
+   ![](./README_GIFs/globalCounter_load.gif)</br>
+    **Add**</br>
+   ![](./README_GIFs/globalCounter_add.gif)</br>
+    **Start value & End value**</br>
+   ![](./README_GIFs/globalCounter_start_end.gif)</br>
+   **Errors**</br>
+   ![](./README_GIFs/globalCounter_errors.gif)</br>
 ---
- - `randomStringLiteral`:
+ ## randomStringLiteral
    - parameters:
      - **List string literals (use | as separator)**
      - **Use a separator (Optional)**
 
    ![](./README_GIFs/randomStringLiteral.gif)
 ---
- - `samplerComment` - a function that returns a comment of the element in which it is called. Like samplerName, only samplerComment
+ ## samplerComment
+ A function that returns a comment of the element in which it is called. Like samplerName, only samplerComment
 
    ![](./README_GIFs/samplerComment.gif)
 ---
- - `timeRandom` - generates a random date within the specified range
+ ## timeRandom
+ Generates a random date within the specified range
    - parameters:
      - **Start time** - start date of the range
      - **End time** - end date of the range
@@ -114,10 +126,10 @@ Ready-made functions:
        - **y** - years
      - **Time format (default timestamp)** - the format in which the random date will be returned
     
-   **Relative time**
-   ![](./README_GIFs/timeRandom_relative.gif)
-   **Absolute time**
-   ![](./README_GIFs/timeRandom_absolute.gif)
+   **Relative time**</br>
+   ![](./README_GIFs/timeRandom_relative.gif)</br>
+   **Absolute time**</br>
+   ![](./README_GIFs/timeRandom_absolute.gif)</br>
 ---
 Version Jmeter: 5.4.3   
 The Custom_functions-x.x.x.jar should be put in %jmeter%\lib\ext
