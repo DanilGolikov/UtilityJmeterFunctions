@@ -1,5 +1,6 @@
-package com.xmeter.functions;
+package dg.jmeter.plugins.functions.func;
 
+import dg.jmeter.plugins.functions.utils.customFunctionUtils;
 import org.apache.jmeter.engine.util.CompoundVariable;
 import org.apache.jmeter.functions.AbstractFunction;
 import org.apache.jmeter.samplers.SampleResult;
@@ -9,8 +10,6 @@ import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
-
-import static com.xmeter.utils.customFunctionUtils.*;
 
 public class timeRandom extends AbstractFunction{
     private static final List<String> desc = new LinkedList<>();
@@ -36,15 +35,15 @@ public class timeRandom extends AbstractFunction{
         String dateFormatInput = ((CompoundVariable) values[2]).execute().trim();
         String result;
 
-        Long startTimeTimestamp = convertRelativeTime(startTimeInput);
-        Long endTimeTimestamp = convertRelativeTime(endTimeInput);
+        Long startTimeTimestamp = customFunctionUtils.convertRelativeTime(startTimeInput);
+        Long endTimeTimestamp = customFunctionUtils.convertRelativeTime(endTimeInput);
 
         if (startTimeTimestamp == null)
-            startTimeTimestamp = convertToTimestamp(startTimeInput);
+            startTimeTimestamp = customFunctionUtils.convertToTimestamp(startTimeInput);
         if (endTimeTimestamp == null)
-            endTimeTimestamp = convertToTimestamp(endTimeInput);
+            endTimeTimestamp = customFunctionUtils.convertToTimestamp(endTimeInput);
 
-        long randomTimeTimestamp = randomFunc(startTimeTimestamp, endTimeTimestamp);
+        long randomTimeTimestamp = customFunctionUtils.randomFunc(startTimeTimestamp, endTimeTimestamp);
 
         if (dateFormatInput.isEmpty())
             result = Long.toString(randomTimeTimestamp);

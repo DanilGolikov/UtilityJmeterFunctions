@@ -1,19 +1,18 @@
-package com.xmeter.functions;
+package dg.jmeter.plugins.functions.func;
 
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.InputMismatchException;
-import java.util.concurrent.ThreadLocalRandom;
 
+import dg.jmeter.plugins.functions.utils.customFunctionUtils;
 import org.apache.jmeter.engine.util.CompoundVariable;
 import org.apache.jmeter.functions.AbstractFunction;
 import org.apache.jmeter.samplers.SampleResult;
 import org.apache.jmeter.samplers.Sampler;
-import org.apache.jmeter.threads.JMeterVariables;
 
-import static com.xmeter.utils.customFunctionUtils.alignmentStr;
-import static com.xmeter.utils.customFunctionUtils.randomFunc;
+import static dg.jmeter.plugins.functions.utils.customFunctionUtils.alignmentStr;
+import static dg.jmeter.plugins.functions.utils.customFunctionUtils.randomFunc;
 
 
 public class generatePinCode extends AbstractFunction{
@@ -52,7 +51,7 @@ public class generatePinCode extends AbstractFunction{
         if (minPIN < 0 || maxPIN < 0)
             throw new InputMismatchException("Numbers cannot be less than 0");
 
-        String result = alignmentStr(randomFunc(minPIN, maxPIN), lenPIN);
+        String result = customFunctionUtils.alignmentStr(customFunctionUtils.randomFunc(minPIN, maxPIN), lenPIN);
 
         String inputVar = ((CompoundVariable) values[3]).execute().trim();
         if (!inputVar.isEmpty())

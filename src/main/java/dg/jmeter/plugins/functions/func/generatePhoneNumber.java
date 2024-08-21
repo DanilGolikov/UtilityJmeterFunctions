@@ -1,16 +1,15 @@
-package com.xmeter.functions;
+package dg.jmeter.plugins.functions.func;
 
 import java.util.*;
-import java.util.concurrent.ThreadLocalRandom;
 
+import dg.jmeter.plugins.functions.utils.customFunctionUtils;
 import org.apache.jmeter.engine.util.CompoundVariable;
 import org.apache.jmeter.functions.AbstractFunction;
 import org.apache.jmeter.samplers.SampleResult;
 import org.apache.jmeter.samplers.Sampler;
-import org.apache.jmeter.threads.JMeterVariables;
 
-import static com.xmeter.utils.customFunctionUtils.alignmentStr;
-import static com.xmeter.utils.customFunctionUtils.randomFunc;
+import static dg.jmeter.plugins.functions.utils.customFunctionUtils.alignmentStr;
+import static dg.jmeter.plugins.functions.utils.customFunctionUtils.randomFunc;
 
 
 public class generatePhoneNumber extends AbstractFunction{
@@ -44,8 +43,8 @@ public class generatePhoneNumber extends AbstractFunction{
             resultFormatString = resultFormatString.replace("\\x", "x");
         }
 
-        String countryCodeStr = countryCode[randomFunc(0, countryCode.length-1)];
-        String otherNumbers = alignmentStr(randomFunc(0, Long.parseLong("9999999999")+1), 10);
+        String countryCodeStr = countryCode[customFunctionUtils.randomFunc(0, countryCode.length-1)];
+        String otherNumbers = customFunctionUtils.alignmentStr(customFunctionUtils.randomFunc(0, Long.parseLong("9999999999")+1), 10);
         String result = countryCodeStr + otherNumbers;
 
         if (!resultFormatString.isEmpty())

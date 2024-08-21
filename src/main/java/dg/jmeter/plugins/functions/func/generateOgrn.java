@@ -1,17 +1,16 @@
-package com.xmeter.functions;
+package dg.jmeter.plugins.functions.func;
 
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
+import dg.jmeter.plugins.functions.utils.customFunctionUtils;
 import org.apache.jmeter.engine.util.CompoundVariable;
 import org.apache.jmeter.functions.AbstractFunction;
 import org.apache.jmeter.samplers.SampleResult;
 import org.apache.jmeter.samplers.Sampler;
-import org.apache.jmeter.threads.JMeterVariables;
 
-import static com.xmeter.utils.customFunctionUtils.randomFunc;
+import static dg.jmeter.plugins.functions.utils.customFunctionUtils.randomFunc;
 
 
 public class generateOgrn extends AbstractFunction{
@@ -55,21 +54,21 @@ public class generateOgrn extends AbstractFunction{
         String result;
 
 
-        priznak[0] = randomFunc(1,2);
+        priznak[0] = customFunctionUtils.randomFunc(1,2);
         if(priznak[0] == 2) priznak[0] = 5;
 
-        godreg[0] = randomFunc(0,2);
-        godreg[1] = randomFunc(0,9);
+        godreg[0] = customFunctionUtils.randomFunc(0,2);
+        godreg[1] = customFunctionUtils.randomFunc(0,9);
 
         while (region[0] == 0 &&  region[1] == 0)
         {
-            region[0] = randomFunc(0,9);
-            region[1] = randomFunc(0,9);
+            region[0] = customFunctionUtils.randomFunc(0,9);
+            region[1] = customFunctionUtils.randomFunc(0,9);
         }
 
         for(i=0;i<7;i++)
         {
-            num[i] = randomFunc(0,9);
+            num[i] = customFunctionUtils.randomFunc(0,9);
         }
 
         part = String.format("%d%d%d%d%d", priznak[0],godreg[0],godreg[1],region[0],region[1]);

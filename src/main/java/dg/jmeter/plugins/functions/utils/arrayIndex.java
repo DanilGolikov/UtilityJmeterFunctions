@@ -1,4 +1,4 @@
-package com.xmeter.utils;
+package dg.jmeter.plugins.functions.utils;
 
 public class arrayIndex {
     String[] arr;

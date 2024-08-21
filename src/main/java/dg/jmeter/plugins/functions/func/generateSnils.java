@@ -1,18 +1,17 @@
-package com.xmeter.functions;
+package dg.jmeter.plugins.functions.func;
 
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
+import dg.jmeter.plugins.functions.utils.customFunctionUtils;
 import org.apache.jmeter.engine.util.CompoundVariable;
 import org.apache.jmeter.functions.AbstractFunction;
 import org.apache.jmeter.samplers.SampleResult;
 import org.apache.jmeter.samplers.Sampler;
-import org.apache.jmeter.threads.JMeterVariables;
 
-import static com.xmeter.utils.customFunctionUtils.alignmentStr;
-import static com.xmeter.utils.customFunctionUtils.randomFunc;
+import static dg.jmeter.plugins.functions.utils.customFunctionUtils.alignmentStr;
+import static dg.jmeter.plugins.functions.utils.customFunctionUtils.randomFunc;
 
 
 public class generateSnils extends AbstractFunction{
@@ -38,7 +37,7 @@ public class generateSnils extends AbstractFunction{
             resultFormatString = resultFormatString.replaceFirst("(?<!\\\\)x", "%s");
         resultFormatString = resultFormatString.replace("\\x", "x");
 
-        String number = alignmentStr(randomFunc(0, 999999999), 9);
+        String number = customFunctionUtils.alignmentStr(customFunctionUtils.randomFunc(0, 999999999), 9);
         String[] numMas = number.split("");
 
         List<Integer> sumMas = new LinkedList<>();
@@ -48,7 +47,7 @@ public class generateSnils extends AbstractFunction{
         int sum = 0;
         for (int a: sumMas) sum += a;
         if (sum > 101) sum %= 101;
-        String checkSum = sum == 100 || sum == 101 ? "00" : alignmentStr(sum, 2);
+        String checkSum = sum == 100 || sum == 101 ? "00" : customFunctionUtils.alignmentStr(sum, 2);
         String result = number+checkSum;
         if (!resultFormatString.isEmpty())
             result = String.format(resultFormatString, result.charAt(0),

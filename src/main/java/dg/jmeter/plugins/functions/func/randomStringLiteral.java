@@ -1,18 +1,17 @@
-package com.xmeter.functions;
+package dg.jmeter.plugins.functions.func;
 
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.regex.Pattern;
 
+import dg.jmeter.plugins.functions.utils.customFunctionUtils;
 import org.apache.jmeter.engine.util.CompoundVariable;
 import org.apache.jmeter.functions.AbstractFunction;
 import org.apache.jmeter.samplers.SampleResult;
 import org.apache.jmeter.samplers.Sampler;
-import org.apache.jmeter.threads.JMeterVariables;
 
-import static com.xmeter.utils.customFunctionUtils.randomFunc;
+import static dg.jmeter.plugins.functions.utils.customFunctionUtils.randomFunc;
 
 
 public class randomStringLiteral extends AbstractFunction{
@@ -43,7 +42,7 @@ public class randomStringLiteral extends AbstractFunction{
 
         String[] literalsInput = (((CompoundVariable) values[0]).execute().trim()).split(Pattern.quote(separatorLiterals));
 
-        String result = literalsInput[randomFunc(0, literalsInput.length-1)];
+        String result = literalsInput[customFunctionUtils.randomFunc(0, literalsInput.length-1)];
 
         String inputVar = ((CompoundVariable) values[2]).execute().trim();
         if (!inputVar.isEmpty())

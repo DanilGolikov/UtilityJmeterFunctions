@@ -1,17 +1,16 @@
-package com.xmeter.functions;
+package dg.jmeter.plugins.functions.func;
 
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
+import dg.jmeter.plugins.functions.utils.customFunctionUtils;
 import org.apache.jmeter.engine.util.CompoundVariable;
 import org.apache.jmeter.functions.AbstractFunction;
 import org.apache.jmeter.samplers.SampleResult;
 import org.apache.jmeter.samplers.Sampler;
-import org.apache.jmeter.threads.JMeterVariables;
 
-import static com.xmeter.utils.customFunctionUtils.randomFunc;
+import static dg.jmeter.plugins.functions.utils.customFunctionUtils.randomFunc;
 
 
 public class generateInnLegal extends AbstractFunction{
@@ -52,17 +51,17 @@ public class generateInnLegal extends AbstractFunction{
 
         while (region[0] == 0 && region[1] == 0)
         {
-            region[0] = randomFunc(0, 9);
-            region[1] = randomFunc(0, 9);
+            region[0] = customFunctionUtils.randomFunc(0, 9);
+            region[1] = customFunctionUtils.randomFunc(0, 9);
         }
 
         while(inspection[0] == 0 &&  inspection[1] == 0)
         {
-            inspection[0] = randomFunc(0, 9);
-            inspection[1] = randomFunc(0, 9);
+            inspection[0] = customFunctionUtils.randomFunc(0, 9);
+            inspection[1] = customFunctionUtils.randomFunc(0, 9);
         }
 
-        for(int i=0;i<5;i++) num[i] = randomFunc(0, 9);
+        for(int i=0;i<5;i++) num[i] = customFunctionUtils.randomFunc(0, 9);
 
         kontr[0] = ((2*region[0] +
                 4*region[1]+

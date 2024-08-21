@@ -1,4 +1,4 @@
-package com.xmeter.functions;
+package dg.jmeter.plugins.functions.func;
 
 import org.apache.jmeter.engine.util.CompoundVariable;
 import org.apache.jmeter.functions.AbstractFunction;

@@ -1,6 +1,6 @@
-package com.xmeter.functions;
+package dg.jmeter.plugins.functions.func;
 
-import com.xmeter.utils.arrayIndex;
+import dg.jmeter.plugins.functions.utils.arrayIndex;
 import org.apache.jmeter.engine.util.CompoundVariable;
 import org.apache.jmeter.functions.AbstractFunction;
 import org.apache.jmeter.samplers.SampleResult;

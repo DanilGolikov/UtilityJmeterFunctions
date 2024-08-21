@@ -1,15 +1,14 @@
-package com.xmeter.functions;
+package dg.jmeter.plugins.functions.func;
 
 import java.util.*;
-import java.util.concurrent.ThreadLocalRandom;
 
+import dg.jmeter.plugins.functions.utils.customFunctionUtils;
 import org.apache.jmeter.engine.util.CompoundVariable;
 import org.apache.jmeter.functions.AbstractFunction;
 import org.apache.jmeter.samplers.SampleResult;
 import org.apache.jmeter.samplers.Sampler;
-import org.apache.jmeter.threads.JMeterVariables;
 
-import static com.xmeter.utils.customFunctionUtils.randomFunc;
+import static dg.jmeter.plugins.functions.utils.customFunctionUtils.randomFunc;
 
 
 public class generateEmail extends AbstractFunction{
@@ -36,13 +35,13 @@ public class generateEmail extends AbstractFunction{
     {
         if (notDotChar)
         {
-            char symbol = possibleChars.charAt(randomFunc(0, possibleChars.length()-1));
+            char symbol = possibleChars.charAt(customFunctionUtils.randomFunc(0, possibleChars.length()-1));
             while (symbol == '.')
-                symbol = possibleChars.charAt(randomFunc(0, possibleChars.length()-1));
+                symbol = possibleChars.charAt(customFunctionUtils.randomFunc(0, possibleChars.length()-1));
             return symbol;
 
         }
-        return possibleChars.charAt(randomFunc(0, possibleChars.length()-1));
+        return possibleChars.charAt(customFunctionUtils.randomFunc(0, possibleChars.length()-1));
     }
 
     @Override
@@ -50,7 +49,7 @@ public class generateEmail extends AbstractFunction{
         String[] domainEmail_input = ((CompoundVariable) values[0]).execute().trim().split("\\|");
         if (Objects.equals(domainEmail_input[0], ""))
             throw new InputMismatchException("Impossible to generate email without a domain");
-        String domainEmail = domainEmail_input[randomFunc(0, domainEmail_input.length-1)];
+        String domainEmail = domainEmail_input[customFunctionUtils.randomFunc(0, domainEmail_input.length-1)];
         StringBuilder nameEmail = new StringBuilder();
 
         String nameEMAILsymbols = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!#$%&'*+-/=?^_`{|}~.";
@@ -93,7 +92,7 @@ public class generateEmail extends AbstractFunction{
             if (lenNameEmailMaximum < 1 || lenNameEmailMaximum > 64)
                 throw new InputMismatchException("The length of the email name was entered incorrectly (possible length from 1 to 64)");
         }
-        int lenNameEmail = randomFunc(lenNameEmailMinimum, lenNameEmailMaximum);
+        int lenNameEmail = customFunctionUtils.randomFunc(lenNameEmailMinimum, lenNameEmailMaximum);
 
         boolean lastDot = false;
         nameEmail.append(generateChar(nameEMAILsymbols, true));
