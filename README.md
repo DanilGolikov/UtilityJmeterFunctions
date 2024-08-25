@@ -1,6 +1,7 @@
 # UtilityJmeterFunctions
 
 Utility functions for jmeter
+![](./README_GIFs/allFunc.png)
 
 Ready-made functions:
 ## forEachArray 
