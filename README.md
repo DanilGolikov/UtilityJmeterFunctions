@@ -88,14 +88,14 @@ A function that generates a PIN_CODE
      - **Implement value** - value that will be added (can be negative)
      - **Number length** - format length of the counter
 
-   **Load**</br>
-   ![](./README_GIFs/globalCounter_load.gif)</br>
-    **Add**</br>
-   ![](./README_GIFs/globalCounter_add.gif)</br>
-    **Start value & End value**</br>
-   ![](./README_GIFs/globalCounter_start_end.gif)</br>
-   **Errors**</br>
-   ![](./README_GIFs/globalCounter_errors.gif)</br>
+### Load</br>
+![](./README_GIFs/globalCounter_load.gif)</br>
+### Add</br>
+![](./README_GIFs/globalCounter_add.gif)</br>
+### Start value & End value</br>
+![](./README_GIFs/globalCounter_start_end.gif)</br>
+### Errors</br>
+![](./README_GIFs/globalCounter_errors.gif)</br>
 ---
  ## randomStringLiteral
    - parameters:
