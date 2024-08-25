@@ -126,10 +126,10 @@ A function that generates a PIN_CODE
        - **y** - years
      - **Time format (default timestamp)** - the format in which the random date will be returned
     
-   **Relative time**</br>
-   ![](./README_GIFs/timeRandom_relative.gif)</br>
-   **Absolute time**</br>
-   ![](./README_GIFs/timeRandom_absolute.gif)</br>
+### Relative time</br>
+![](./README_GIFs/timeRandom_relative.gif)</br>
+### Absolute time</br>
+![](./README_GIFs/timeRandom_absolute.gif)</br>
 ---
 Version Jmeter: 5.4.3   
 The Custom_functions-x.x.x.jar should be put in %jmeter%\lib\ext
