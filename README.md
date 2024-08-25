@@ -1,6 +1,6 @@
-# Custom_jmeter_functions
+# UtilityJmeterFunctions
 
-Custom functions for jmeter
+Utility functions for jmeter
 
 Ready-made functions:
 ## forEachArray 
@@ -88,14 +88,14 @@ A function that generates a PIN_CODE
      - **Implement value** - value that will be added (can be negative)
      - **Number length** - format length of the counter
 
-   **Load**</br>
-   ![](./README_GIFs/globalCounter_load.gif)</br>
-    **Add**</br>
-   ![](./README_GIFs/globalCounter_add.gif)</br>
-    **Start value & End value**</br>
-   ![](./README_GIFs/globalCounter_start_end.gif)</br>
-   **Errors**</br>
-   ![](./README_GIFs/globalCounter_errors.gif)</br>
+### Load</br>
+![](./README_GIFs/globalCounter_load.gif)</br>
+### Add</br>
+![](./README_GIFs/globalCounter_add.gif)</br>
+### Start value & End value</br>
+![](./README_GIFs/globalCounter_start_end.gif)</br>
+### Errors</br>
+![](./README_GIFs/globalCounter_errors.gif)</br>
 ---
  ## randomStringLiteral
    - parameters:
@@ -126,10 +126,10 @@ A function that generates a PIN_CODE
        - **y** - years
      - **Time format (default timestamp)** - the format in which the random date will be returned
     
-   **Relative time**</br>
-   ![](./README_GIFs/timeRandom_relative.gif)</br>
-   **Absolute time**</br>
-   ![](./README_GIFs/timeRandom_absolute.gif)</br>
+### Relative time</br>
+![](./README_GIFs/timeRandom_relative.gif)</br>
+### Absolute time</br>
+![](./README_GIFs/timeRandom_absolute.gif)</br>
 ---
 Version Jmeter: 5.4.3   
 The Custom_functions-x.x.x.jar should be put in %jmeter%\lib\ext
