@@ -1,6 +1,6 @@
-# Custom_jmeter_functions
+# UtilityJmeterFunctions
 
-Custom functions for jmeter
+Utility functions for jmeter
 
 Ready-made functions:
 ## forEachArray 
